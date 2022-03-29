@@ -5,9 +5,6 @@ Utilizando  api-gateway  com a porta 8765 ele faz o rotiamento para o serviço e
 
 Onde um serviço é uma loja de livros e o outro serviço é onde se encontra os valores base das moedas para conversão.
 
-## Importante
-
-Será necessario fazer os devidos ajustes no  yml para ser usado no seu banco de dados.
 
 Endereços para visualizações:
 
@@ -26,3 +23,7 @@ Caminho para fazer a simulação de cmabio das moedas (O service book-service fa
 Onde você insere o valor que deseja converter, a moeda base e a moeda que deseja retornar
 
 ## http://localhost:8765/cambio-service/10/USD/CLP
+
+## Importante
+
+Será necessario fazer os devidos ajustes no  yml para ser usado no seu banco de dados.
