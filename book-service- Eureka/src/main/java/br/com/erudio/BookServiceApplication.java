@@ -2,14 +2,15 @@ package br.com.erudio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableEurekaServer
-public class Application {
+@EnableFeignClients
+public class BookServiceApplication {
 
+	
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(BookServiceApplication.class, args);
 	}
 
 }
