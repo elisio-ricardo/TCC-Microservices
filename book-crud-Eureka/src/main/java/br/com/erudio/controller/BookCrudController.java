@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Book CRUD endPoint")
 @RestController
-@RequestMapping("/book-crud")
+@RequestMapping("/livros")
 public class BookCrudController {
 
 	@Autowired

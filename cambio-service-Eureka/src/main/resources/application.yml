@@ -10,7 +10,7 @@ spring:
     name: cambio-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cambio_service?createDatabaseIfNotExist=True&useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/cambio_service?useTimezone=true&serverTimezone=UTC
     username: root
     password: 
   jpa:
