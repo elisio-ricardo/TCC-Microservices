@@ -2,14 +2,14 @@ package br.com.erudio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableEurekaServer
-public class NamingServiceApplication {
+@EnableFeignClients
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NamingServiceApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
