@@ -1,7 +1,11 @@
 package br.com.erudio.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -20,7 +24,14 @@ public class BookDTO implements Serializable {
 	@NotEmpty(message = "Campo TITLE é requerido")
 	@Length(min = 3, max = 200, message = "O campo TITLE deve ter entre 3 e 200 caracters")
 	private String title;
-
+	
+	private Double price;
+	
+	@Column(name = "launch_date", nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date launchDate;
+	
+	
 	public BookDTO() {
 		super();
 	}
@@ -30,6 +41,8 @@ public class BookDTO implements Serializable {
 		this.id = obj.getId();
 		this.author = obj.getAuthor();
 		this.title = obj.getTitle();
+		this.price = obj.getPrice();
+		this.launchDate = obj.getLaunchDate();
 	}
 
 	public Long getId() {
@@ -55,5 +68,25 @@ public class BookDTO implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Date getLaunchDate() {
+		return launchDate;
+	}
+
+	public void setLaunchDate(Date launchDate) {
+		this.launchDate = launchDate;
+	}
+	
+	
+	
+	
 
 }

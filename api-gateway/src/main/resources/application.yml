@@ -16,7 +16,23 @@ spring:
         locator:
           enabled: true
           #lower-case-service-id: true
-     routes:
+     default-filters:
+      - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+     globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: "http://localhost:4200"
+              allowedMethods: 
+              - POST
+              - GET
+              - OPTIONS
+              allowedHeaders: "*"
+              allowCredentials: true         
+          
+          
+          
+          
+     routes:     
      - id: cambio-service
        uri: lb://cambio-service
        predicates: 
@@ -25,6 +41,10 @@ spring:
        uri: lb://book-service
        predicates: 
        - Path=/book-service/**
+     - id: livros
+       uri: lb://livros
+       predicates: 
+       - Path=/livros/**
      - id: openapi
        uri: lb://api-gateway
        predicates: 

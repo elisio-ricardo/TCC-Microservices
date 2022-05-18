@@ -49,10 +49,11 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
-			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\neaming-service"/>
+			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\api-gateway"/>
 			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\cambio-service-Eureka"/>
 			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\book-service- Eureka"/>
-			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\api-gateway"/>
+			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\book-crud-Eureka"/>
+			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\neaming-service"/>
 			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\erudio-config-server"/>
 			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\06-neaming-service"/>
 			<item value="C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo microservice\06-cambio-service-Eureka"/>
