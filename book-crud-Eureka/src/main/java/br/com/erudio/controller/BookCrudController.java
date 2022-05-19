@@ -58,7 +58,8 @@ public class BookCrudController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<BookDTO> update(@Valid @PathVariable Long id, @RequestBody BookDTO objDto) {
-
+		
+		System.out.println("O preço atualizado é " + objDto.getPrice());
 		Book newObj = crudService.update(id, objDto);
 
 		return ResponseEntity.ok().body(new BookDTO(newObj));

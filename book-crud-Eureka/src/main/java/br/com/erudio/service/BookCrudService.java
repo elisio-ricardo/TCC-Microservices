@@ -40,6 +40,7 @@ public class BookCrudService {
 		Book obj = findById(id);
 		obj.setAuthor(objDto.getAuthor());
 		obj.setTitle(objDto.getTitle());
+		obj.setPrice(objDto.getPrice());
 		return bookCrudRepository.save(obj);
 	}
 
