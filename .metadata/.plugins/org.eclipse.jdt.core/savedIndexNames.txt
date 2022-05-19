@@ -11,9 +11,9 @@ INDEX VERSION 1.131+C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo micr
 1420554540.index
 3622106052.index
 883747169.index
-1798618592.index
-4058888590.index
 3396932127.index
+4058888590.index
+1798618592.index
 942613267.index
 525487248.index
 2074584888.index
@@ -22,9 +22,9 @@ INDEX VERSION 1.131+C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo micr
 3009780113.index
 3444316608.index
 1483194529.index
-3502627206.index
-39275537.index
 1027434285.index
+39275537.index
+3502627206.index
 302526186.index
 1011213101.index
 3468938150.index
@@ -61,8 +61,8 @@ INDEX VERSION 1.131+C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo micr
 3050377522.index
 3502695958.index
 3101944720.index
-1767574757.index
 4241558524.index
+1767574757.index
 2605560893.index
 844344488.index
 2728443247.index
@@ -88,7 +88,7 @@ INDEX VERSION 1.131+C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo micr
 1830312366.index
 1624647630.index
 3568086107.index
-3383080025.index
+1233039977.index
 3307202326.index
 2916694687.index
 2290787181.index
@@ -96,7 +96,7 @@ INDEX VERSION 1.131+C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo micr
 3090300109.index
 2742240002.index
 665960359.index
-1233039977.index
+3383080025.index
 601679545.index
 401439158.index
 1209711547.index
@@ -236,8 +236,8 @@ INDEX VERSION 1.131+C:\Users\Usuario\Downloads\TCC Microservices\tcc codigo micr
 3809767345.index
 2902813905.index
 322715176.index
-3377599252.index
 3868993585.index
+3377599252.index
 3878759538.index
 173443379.index
 2268030886.index

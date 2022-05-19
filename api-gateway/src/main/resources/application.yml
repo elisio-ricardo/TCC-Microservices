@@ -25,6 +25,8 @@ spring:
               allowedMethods: 
               - POST
               - GET
+              - DELETE
+              - PUT
               - OPTIONS
               allowedHeaders: "*"
               allowCredentials: true         
