@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/book-crud-Eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/book-crud-Eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/book-service- Eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/book-service- Eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cambio-service-Eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cambio-service-Eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neaming-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neaming-service/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

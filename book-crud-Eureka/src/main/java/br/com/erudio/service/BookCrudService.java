@@ -2,6 +2,7 @@ package br.com.erudio.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,6 +30,16 @@ public class BookCrudService {
 
 	public List<Book> findAll() {
 		return bookCrudRepository.findAll();
+	}
+
+	public List<BookDTO> getListOfBooKDTO(){
+		List<Book> books = bookCrudRepository.findAll();
+
+		List<BookDTO> collect = books.stream().map(b ->
+				new BookDTO(b)
+		).collect(Collectors.toList());
+
+		return collect;
 	}
 
 	public Book create(Book obj) {

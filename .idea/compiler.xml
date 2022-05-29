@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="naming-service" />
+        <module name="book-crud-Eureka" />
+        <module name="book-service" />
+        <module name="cambio-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-gateway" target="11" />
+      <module name="book-crud-Eureka" target="11" />
+      <module name="book-service" target="11" />
+      <module name="cambio-service" target="11" />
+      <module name="naming-service" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
+      <module name="book-crud-Eureka" options="-parameters" />
+      <module name="book-service" options="-parameters" />
+      <module name="cambio-service" options="-parameters" />
+      <module name="naming-service" options="-parameters" />
+    </option>
+  </component>
+</project>

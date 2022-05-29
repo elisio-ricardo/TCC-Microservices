@@ -27,7 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins =  "*")
 @Tag(name = "Book CRUD endPoint")
 @RestController
-@RequestMapping("/livros")
+@RequestMapping("/book-service")
 public class BookCrudController {
 
 	@Autowired
@@ -42,9 +42,17 @@ public class BookCrudController {
 
 	@GetMapping
 	public ResponseEntity<List<BookDTO>> findAll() {
-		List<Book> list = crudService.findAll();
-		List<BookDTO> listDTO = list.stream().map(obj -> new BookDTO(obj)).collect(Collectors.toList());
+		List<BookDTO> listDTO = crudService.getListOfBooKDTO();
+		return ResponseEntity.ok().body(listDTO);
+	}
 
+	@GetMapping(value = "/time")
+	public ResponseEntity<List<BookDTO>> findAllTimeProcessed() {
+		Long start = System.nanoTime();
+		List<BookDTO> listDTO = crudService.getListOfBooKDTO();
+		Long end = System.nanoTime();
+		System.out.println("Tempo passado dentro no metodo :" + (end-start) + " nanossegundos");
+		System.out.println("Tempo passado dentro no metodo segundos :" + (end-start)*(Math.pow(10, -9)) + "s");
 		return ResponseEntity.ok().body(listDTO);
 	}
 
