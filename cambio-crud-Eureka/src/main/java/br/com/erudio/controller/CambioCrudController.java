@@ -2,10 +2,11 @@ package br.com.erudio.controller;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import br.com.erudio.dtos.CambioDTO;
+import br.com.erudio.model.Cambio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,37 +20,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.erudio.dtos.BookDTO;
-import br.com.erudio.model.Book;
-import br.com.erudio.service.BookCrudService;
+import br.com.erudio.service.CambioCrudService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins =  "*")
-@Tag(name = "Book CRUD endPoint")
+@Tag(name = "Cambio CRUD endPoint")
 @RestController
-@RequestMapping("/book-crud")
-public class BookCrudController {
+@RequestMapping("/cambio-crud")
+public class CambioCrudController {
 
 	@Autowired
-	private BookCrudService crudService;
+	private CambioCrudService crudService;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Book> findById(@PathVariable Long id) {
+	public ResponseEntity<Cambio> findById(@PathVariable Long id) {
 
-		Book obj = crudService.findById(id);
+		Cambio obj = crudService.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<BookDTO>> findAll() {
-		List<BookDTO> listDTO = crudService.getListOfBooKDTO();
+	public ResponseEntity<List<Cambio>> findAll() {
+		List<Cambio> listDTO = crudService.getListOfCambio();
 		return ResponseEntity.ok().body(listDTO);
 	}
 
 	@GetMapping(value = "/time")
-	public ResponseEntity<List<BookDTO>> findAllTimeProcessed() {
+	public ResponseEntity<List<Cambio>> findAllTimeProcessed() {
 		Long start = System.nanoTime();
-		List<BookDTO> listDTO = crudService.getListOfBooKDTO();
+		List<Cambio> listDTO = crudService.getListOfCambio();
 		Long end = System.nanoTime();
 		System.out.println("Tempo passado dentro no metodo :" + (end-start) + " nanossegundos");
 		System.out.println("Tempo passado dentro no metodo segundos :" + (end-start)*(Math.pow(10, -9)) + "s");
@@ -57,7 +56,7 @@ public class BookCrudController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Book> create(@Valid @RequestBody Book obj) {
+	public ResponseEntity<Cambio> create(@Valid @RequestBody Cambio obj) {
 		obj = crudService.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
@@ -65,12 +64,12 @@ public class BookCrudController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<BookDTO> update(@Valid @PathVariable Long id, @RequestBody BookDTO objDto) {
+	public ResponseEntity<CambioDTO> update(@Valid @PathVariable Long id, @RequestBody CambioDTO objDto) {
 		
-		System.out.println("O preço atualizado é " + objDto.getPrice());
-		Book newObj = crudService.update(id, objDto);
 
-		return ResponseEntity.ok().body(new BookDTO(newObj));
+		Cambio newObj = crudService.update(id, objDto);
+
+		return ResponseEntity.ok().body(new CambioDTO(newObj));
 	}
 
 	@DeleteMapping(value = "/{id}")
