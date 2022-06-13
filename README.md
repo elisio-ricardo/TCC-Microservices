@@ -58,6 +58,5 @@ Será necessario fazer os devidos ajustes no  yml para ser usado no seu banco de
 				}
 	
 	Ao enviar o post, o consumer dos microsserviços e o consumer do monolitico irá receber a mensagem e realizar as mesmas operações ao mesmo tempo, o console ira logar o tempo percorrido em cada uma das arquiteturas.
-@fabiofsilva92
  
 
