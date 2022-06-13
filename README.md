@@ -32,13 +32,10 @@ Será necessario fazer os devidos ajustes no  yml para ser usado no seu banco de
 ## Como realizar os testes do kafka com microsservice e monolitico
 
 
-	Subir instancia do mysql no docker utilizando o seguinte docker-compose.
-		Docker compose mysql - https://gist.github.com/fabiofsilva92/5d38d9b9980e96140cd3bf7dcdf7511d
-		
-		
-	Subir instancia kafka no docker utilizando o seguinte docker-compose. 
-		Docker compose kafka + kafdrop + zookeper - https://gist.github.com/fabiofsilva92/2141a7a7e67743ce8d7035b964fcd97a
-		
+	Subir instancia do mysql e kafka no docker utilizando o seguinte docker-compose.
+		Docker compose mysql + kafka + kafdrop + zookeper :
+		 - https://gist.github.com/fabiofsilva92/2141a7a7e67743ce8d7035b964fcd97a
+			
 	Iniciar microsservice naming-service
 	Iniciar microsservice book-crud (porta 7000)
 	Iniciar microsservice cambio-crud (porta 7080)
