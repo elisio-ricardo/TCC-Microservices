@@ -43,10 +43,10 @@ spring:
        uri: lb://book-service
        predicates: 
        - Path=/book-service/**
-     - id: livros
-       uri: lb://livros
+     - id: book-crud
+       uri: lb://book-crud
        predicates: 
-       - Path=/livros/**
+       - Path=/book-crud/**
      - id: openapi
        uri: lb://api-gateway
        predicates: 
