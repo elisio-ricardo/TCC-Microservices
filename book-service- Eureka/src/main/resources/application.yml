@@ -19,7 +19,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3336/book_service?useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3336/book_service?createDatabaseIfNotExist=True&useTimezone=true&serverTimezone=UTC
     username: root
     password: 
   jackson:

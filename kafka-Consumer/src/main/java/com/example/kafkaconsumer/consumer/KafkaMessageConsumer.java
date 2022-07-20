@@ -70,7 +70,7 @@ public class KafkaMessageConsumer {
                 Long start = System.nanoTime();
                 ResponseEntity<List<BookDTO>> all = bookProxy.findAll();
                 Long end = System.nanoTime();
-                log.info("Tempo passado no metodo :" + (end-start) + " nanossegundos");
+                log.info("MICROSSERVICE - Tempo passado no metodo :" + (end-start) + " nanossegundos");
 //                System.out.println("Tempo passado no metodo segundos :" + (end-start)*(Math.pow(10, -9)) + "s");
 //
 //                System.out.println("------------");
