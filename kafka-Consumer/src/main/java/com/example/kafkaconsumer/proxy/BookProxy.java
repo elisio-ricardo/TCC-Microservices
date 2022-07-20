@@ -13,8 +13,8 @@ import java.util.List;
 @FeignClient(url="http://localhost:7000", name="book-crud")
 public interface BookProxy {
 
-    @GetMapping(value = "/book-crud/{id}/{currency}")
-    public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency);
+//    @GetMapping(value = "/book-crud/{id}/{currency}")
+//    public Book getBook(@PathVariable("id") Long id, @PathVariable("currency") String currency);
 
     @GetMapping(value = "/book-crud/{id}")
     public ResponseEntity<Book> findById(@PathVariable Long id);
