@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import br.com.erudio.dtos.BookDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,9 +54,7 @@ public class Book implements Serializable {
 	@Transient
 	private String environment;
 
-
-
-	@Override
+    @Override
 	public int hashCode() {
 		return Objects.hash(author, currency, environment, id, launchDate, price, title);
 	}

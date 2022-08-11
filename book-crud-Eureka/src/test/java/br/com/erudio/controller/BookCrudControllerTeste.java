@@ -4,7 +4,6 @@ package br.com.erudio.controller;
 import br.com.erudio.dtos.BookDTO;
 import br.com.erudio.model.Book;
 import br.com.erudio.service.BookCrudService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,19 +12,15 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BookCrudController.class)
+@WebMvcTest()
 @DisplayName("BookCrudControllerTest")
 public class BookCrudControllerTeste {
 
@@ -73,7 +68,7 @@ public class BookCrudControllerTeste {
                 .andExpect(status().isOk());
 
         Mockito.verify(bookCrudService, Mockito.times(1))
-                .getListOfBooKDTO();
+                .findAll();
     }
 
     @Test

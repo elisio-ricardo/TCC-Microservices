@@ -21,24 +21,16 @@ public class BookCrudService {
 	private BookCrudRepository bookCrudRepository;
 
 	public Book findById(Long id) {
-
 		Optional<Book> obj = bookCrudRepository.findById(id);
-
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Book.class.getName()));
+				"Objeto não encontrado! Id: " + id ));
 	}
 
-	public List<Book> findAll() {
-		return bookCrudRepository.findAll();
-	}
-
-	public List<BookDTO> getListOfBooKDTO(){
+	public List<BookDTO> findAll(){
 		List<Book> books = bookCrudRepository.findAll();
-
 		List<BookDTO> collect = books.stream().map(b ->
 				new BookDTO(b)
 		).collect(Collectors.toList());
-
 		return collect;
 	}
 
@@ -56,13 +48,10 @@ public class BookCrudService {
 	}
 
 	public void delete(Long id) {
-		findById(id);
-
 		try {
 			bookCrudRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) { // esta exceção é do spring
-			throw new br.com.erudio.service.exception.DataIntegrityViolationException(// adicionada esta exceção
-																						// personalizada
+			throw new br.com.erudio.service.exception.DataIntegrityViolationException(// adicionada esta exceção personalizada
 					"Categoria não pode ser deletado! Possui livros associados");
 		}
 	}

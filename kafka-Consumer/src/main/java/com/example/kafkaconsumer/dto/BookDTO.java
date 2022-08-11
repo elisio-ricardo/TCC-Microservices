@@ -14,7 +14,6 @@ public class BookDTO implements Serializable {
 
 	private String author;
 
-
 	private String title;
 	
 	private Double price;
