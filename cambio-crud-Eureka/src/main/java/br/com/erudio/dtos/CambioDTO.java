@@ -1,11 +1,10 @@
 package br.com.erudio.dtos;
 
+import java.math.BigDecimal;
+
 import br.com.erudio.model.Cambio;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Transient;
-import java.math.BigDecimal;
 
 @Data
 public class CambioDTO {
@@ -18,10 +17,12 @@ public class CambioDTO {
 
     private BigDecimal convertedValue;
 
+    
     public CambioDTO (Cambio cambio){
         this.from = cambio.getFrom();
         this.to = cambio.getTo();
         this.conversionFactor = cambio.getConversionFactor();
         this. convertedValue = cambio.getConvertedValue();
     }
+    
 }

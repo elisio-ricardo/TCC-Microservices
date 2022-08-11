@@ -8,10 +8,18 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.erudio.model.Book;
 
+
+@Builder
+@Data
+@AllArgsConstructor
 public class BookDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
