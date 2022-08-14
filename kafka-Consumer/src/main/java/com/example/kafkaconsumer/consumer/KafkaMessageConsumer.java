@@ -45,15 +45,15 @@ public class KafkaMessageConsumer {
     private void processMessage(MessageConsumerDTO message){
 
         if(message.getService() == ServiceRequested.BOOK){
-            processBookRequest(message);
+            processBookRequest(message.getMethod());
         }else if(message.getService() == ServiceRequested.CAMBIO){
-            processCambioRequest(message);
+            processCambioRequest(message.getMethod());
         }
 
     }
 
-    private void processBookRequest(MessageConsumerDTO message){
-        switch (message.getMethod()){
+    private void processBookRequest(MethodRequested message){
+        switch (message){
             case GET_BOOK:
                 //todo something
 
@@ -64,7 +64,7 @@ public class KafkaMessageConsumer {
                 Long start = System.nanoTime();
                 ResponseEntity<List<BookDTO>> all = bookProxy.findAll();
                 Long end = System.nanoTime();
-                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message.getMethod(), (end-start));
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message, (end-start));
 //                log.info("MICROSSERVICE - Tempo passado no metodo :" + (end-start) + " nanossegundos");
                 break;
             case CREATE_BOOK:
@@ -79,8 +79,8 @@ public class KafkaMessageConsumer {
         }
     }
 
-    private void processCambioRequest(MessageConsumerDTO message){
-        switch (message.getMethod()){
+    private void processCambioRequest(MethodRequested message){
+        switch (message){
             case GET_CAMBIO:
                 break;
             case FIND_CAMBIO_BY_ID:
@@ -90,7 +90,7 @@ public class KafkaMessageConsumer {
                 Long start = System.nanoTime();
                 ResponseEntity<List<Cambio>> all = cambioProxy.findAll();
                 Long end = System.nanoTime();
-                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message.getMethod(), (end-start));
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message, (end-start));
 //                log.info("Tempo passado no metodo :" + (end-start) + " nanossegundos");
                 break;
             case CREATE_CAMBIO:
