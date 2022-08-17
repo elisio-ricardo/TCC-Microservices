@@ -39,9 +39,16 @@ public class BookCrudController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Book> findById(@PathVariable Long id) {
+    public ResponseEntity<BookDTO> findById(@PathVariable Long id) {
         Book obj = crudService.findById(id);
-        return ResponseEntity.ok().body(obj);
+        BookDTO book = BookDTO.builder()
+                .id(obj.getId())
+                .title(obj.getTitle())
+                .author(obj.getAuthor())
+                .price(obj.getPrice())
+                .launchDate(obj.getLaunchDate())
+                .build();
+        return ResponseEntity.ok().body(book);
     }
 
     @GetMapping(value = "/time")
