@@ -29,8 +29,14 @@ public interface BookProxy {
     BookDTO update(@Valid @PathVariable Long id, @RequestBody Book book);
 
     @DeleteMapping(value = "/book-crud/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id);
+    ResponseEntity<Void> delete(@PathVariable Long id);
 
     @GetMapping(value = "/book-crud/time")
     List<BookDTO> findAllTimeProcessed();
+
+    @GetMapping(value = "/book-crud/delete-mocks")
+    ResponseEntity<Void>  deletemocks();
+
+    @GetMapping(value = "/book-crud/get-mocks")
+    List<Book> getMocks();
 }

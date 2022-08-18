@@ -41,6 +41,17 @@ public class Book implements Serializable {
 		this.environment = environment;
 	}
 
+	public Book(String author, String title, Date launchDate, Double price, String currency,
+				String environment) {
+		super();
+		this.author = author;
+		this.launchDate = launchDate;
+		this.price = price;
+		this.title = title;
+		this.currency = currency;
+		this.environment = environment;
+	}
+
 	public Long getId() {
 		return id;
 	}

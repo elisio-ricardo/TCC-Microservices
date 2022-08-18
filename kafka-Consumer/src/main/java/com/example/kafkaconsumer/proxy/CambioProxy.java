@@ -13,19 +13,21 @@ import java.util.List;
 public interface CambioProxy {
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Cambio> findById(@PathVariable Long id) ;
+    Cambio findById(@PathVariable Long id) ;
 
     @GetMapping("/cambio-crud")
-    public ResponseEntity<List<Cambio>> findAll() ;
+    List<Cambio> findAll() ;
+
     @GetMapping(value = "/time")
-    public ResponseEntity<List<Cambio>> findAllTimeProcessed() ;
+    List<Cambio> findAllTimeProcessed() ;
 
     @PostMapping("/cambio-crud")
-    public ResponseEntity<Cambio> create(@Valid @RequestBody Cambio obj) ;
+    Cambio create(@Valid @RequestBody Cambio obj) ;
+
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CambioDTO> update(@Valid @PathVariable Long id, @RequestBody CambioDTO objDto);
+    CambioDTO update(@Valid @PathVariable Long id, @RequestBody CambioDTO objDto);
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id);
+    Void delete(@PathVariable Long id);
 
 }

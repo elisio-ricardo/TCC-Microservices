@@ -39,11 +39,10 @@ public class BookCrudService {
 		return bookCrudRepository.save(obj);
 	}
 
-	public Book update(Long id, BookDTO objDto) {
+	public Book update(Long id, Book objDto) {
 		Book obj = findById(id);
-		obj.setAuthor(objDto.getAuthor());
-		obj.setTitle(objDto.getTitle());
-		obj.setPrice(objDto.getPrice());
+		objDto.setId(obj.getId());
+		obj = objDto;
 		return bookCrudRepository.save(obj);
 	}
 
@@ -56,4 +55,15 @@ public class BookCrudService {
 		}
 	}
 
+    public void deleteMocks() {
+		List<Book> books = bookCrudRepository.getBooksMocks();
+		for (int i = 0; i < books.size(); i++) {
+			System.out.println(books.get(i));
+			bookCrudRepository.deleteById(books.get(i).getId());
+		}
+	}
+
+	public List<Book> getBooksMocks(){
+		return bookCrudRepository.getBooksMocks();
+	}
 }

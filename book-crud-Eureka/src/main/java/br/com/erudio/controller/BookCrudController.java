@@ -69,7 +69,7 @@ public class BookCrudController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<BookDTO> update(@Valid @PathVariable Long id, @RequestBody BookDTO bookDto) {
+    public ResponseEntity<BookDTO> update(@Valid @PathVariable Long id, @RequestBody Book bookDto) {
         Book newBook = crudService.update(id, bookDto);
         return ResponseEntity.ok().body(new BookDTO(newBook));
     }
@@ -78,6 +78,17 @@ public class BookCrudController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         crudService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/delete-mocks")
+    public ResponseEntity<Void>  deletemocks(){
+        crudService.deleteMocks();
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/get-mocks")
+    public ResponseEntity<List<Book>>  getMocks(){
+        return ResponseEntity.ok().body(crudService.getBooksMocks());
     }
 
 }

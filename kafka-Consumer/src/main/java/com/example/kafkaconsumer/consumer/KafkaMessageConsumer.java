@@ -21,6 +21,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -60,42 +61,114 @@ public class KafkaMessageConsumer {
     }
 
     private void processBookRequest(MessageConsumerDTO message){
-        switch (message.getMethod()){
+        switch (message.getMethod()) {
 
             //Book CRUD
-            case FIND_BOOK_BY_ID:
+            case FIND_BOOK_BY_ID:{
                 //todo something
-                Integer id = (Integer) message.getParams().stream().findFirst().get();
-                Long id2 = Long.parseLong(String.valueOf(id));
-                BookDTO byId = bookProxy.findById(id2);
-                break;
-            case FIND_ALL_BOOK:
                 String initialTime = LocalDateTime.now().toString();
-                Long start = System.nanoTime();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    BookDTO byId = bookProxy.findById(1l);
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end - start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(), message.getMethod().toString());
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end - start));
+            }
+                break;
+
+            case FIND_ALL_BOOK: {
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
                 for (int i = 0; i < message.getRepetitions(); i++) {
                     List<BookDTO> all = bookProxy.findAll();
                 }
-                Long end = System.nanoTime();
+                Long end = System.currentTimeMillis();
                 String endTime = LocalDateTime.now().toString();
                 Long timeLapsed = end-start;
 
-                Transaction transactionBuilder = Transaction.builder()
-                        .initialTime(initialTime)
-                        .endTime(endTime)
-                        .timeLapsed(timeLapsed.toString())
-                        .repetitions(message.getRepetitions())
-                        .method(MethodRequested.FIND_ALL_BOOK.toString()).build();
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(),message.getMethod().toString());
 
-                transactionService.addTransaction(transactionBuilder);
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end-start));
+            }
+                break;
 
-                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message.getMethod(), (end-start));
-//                log.info("MICROSSERVICE - Tempo passado no metodo :" + (end-start) + " nanossegundos");
+            case CREATE_BOOK: {
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    BookDTO bookDTO = bookProxy.create(getMoockBook());
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end-start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(),message.getMethod().toString());
+
+                deleteBookMocks();
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end-start));
+            }
                 break;
-            case CREATE_BOOK:
+
+            case UPDATE_BOOK: {
+
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    BookDTO bookDTO = bookProxy.create(getMoockBook());
+                }
+                List<Book> listMock = getListMock();
+
+
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < listMock.size(); i++) {
+                    listMock.get(i).setTitle("Mock update");
+                    bookProxy.update(listMock.get(i).getId(), listMock.get(i));
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end-start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(),message.getMethod().toString());
+
+                deleteBookMocks();
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end-start));
+            }
                 break;
-            case UPDATE_BOOK:
-                break;
+
             case DELETE_BOOK:
+            {
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    BookDTO bookDTO = bookProxy.create(getMoockBook());
+                }
+                List<Book> listMock = getListMock();
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < listMock.size(); i++) {
+                    bookProxy.delete(listMock.get(i).getId());
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end-start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(),message.getMethod().toString());
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end-start));
+            }
                 break;
 
             default:
@@ -109,13 +182,22 @@ public class KafkaMessageConsumer {
                 break;
             case FIND_CAMBIO_BY_ID:
                 break;
-            case FIND_ALL_CAMBIO:
-                //todo something
-                Long start = System.nanoTime();
-                ResponseEntity<List<Cambio>> all = cambioProxy.findAll();
-                Long end = System.nanoTime();
-                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message, (end-start));
-//                log.info("Tempo passado no metodo :" + (end-start) + " nanossegundos");
+            case FIND_ALL_CAMBIO: {
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    List<Cambio> all = cambioProxy.findAll();
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end - start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(), MethodRequested.FIND_ALL_CAMBIO.toString());
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message, (end - start));
+            }
                 break;
             case CREATE_CAMBIO:
                 break;
@@ -128,5 +210,49 @@ public class KafkaMessageConsumer {
                 System.out.println("Erro nao encontrado");
         }
     }
+
+    private Book getMoockBook() {
+
+        Date date = new Date();
+
+        Book book = new Book("Autor mock","titulo mock", date, 100d, "USD", "environment");
+
+        return book;
+
+    }
+
+    private void deleteBookMocks() {
+        try{
+            bookProxy.deletemocks();
+        }catch (Exception ex){
+            log.info("Error "+ex.getMessage());
+        }
+    }
+
+    private List<Book> getListMock(){
+        try{
+            List<Book> mocks = bookProxy.getMocks();
+            return mocks;
+        }catch (Exception ex){
+            log.info("Error "+ex.getMessage());
+        }
+        return null;
+    }
+
+
+    private void registerTransaction(String initialTime, String endTime, String timeLapsed, Integer level, Integer repetitions, String method) {
+        timeLapsed = timeLapsed+"ms";
+
+        Transaction transactionBuilder = Transaction.builder()
+                .initialTime(initialTime)
+                .endTime(endTime)
+                .timeLapsed(timeLapsed.toString())
+                .repetitions(repetitions)
+                .method(method).build();
+
+        transactionService.addTransaction(transactionBuilder);
+    }
+
+
 
 }
