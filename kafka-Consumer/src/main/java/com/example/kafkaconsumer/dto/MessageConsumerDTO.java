@@ -15,6 +15,7 @@ public class MessageConsumerDTO {
     private ServiceRequested service;
     private MethodRequested method;
     private List<Object> params;
+    private Integer repetitions;
 
 }
 

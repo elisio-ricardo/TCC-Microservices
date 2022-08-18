@@ -25,7 +25,9 @@ public class MessageController {
                 id(UUID.randomUUID().toString())
                 .service(messageDTO.getService())
                 .method(messageDTO.getMethod())
-                .params(messageDTO.getParams()).build();
+                .params(messageDTO.getParams())
+                .repetitions(messageDTO.getRepetitions())
+                .build();
 
         messageProducer.send(message);
 

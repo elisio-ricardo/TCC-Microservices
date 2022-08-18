@@ -39,17 +39,21 @@ spring:
        uri: lb://cambio-service
        predicates: 
        - Path=/cambio-service/**
+#
      - id: book-service
        uri: lb://book-service
-       predicates: 
+       predicates:
        - Path=/book-service/**
+#
      - id: book-crud
        uri: lb://book-crud
        predicates: 
        - Path=/book-crud/**
+#
      - id: openapi
        uri: lb://api-gateway
        predicates: 
        - Path=/v3/api-docs/**
+#
        filters:
        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs

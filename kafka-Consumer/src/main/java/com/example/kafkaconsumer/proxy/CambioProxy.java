@@ -12,20 +12,28 @@ import java.util.List;
 @FeignClient(url="http://localhost:7080", name="cambio-crud")
 public interface CambioProxy {
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Cambio> findById(@PathVariable Long id) ;
+    @GetMapping(value = "/cambio-crud/{id}")
+    Cambio findById(@PathVariable Long id) ;
 
     @GetMapping("/cambio-crud")
-    public ResponseEntity<List<Cambio>> findAll() ;
-    @GetMapping(value = "/time")
-    public ResponseEntity<List<Cambio>> findAllTimeProcessed() ;
+    List<Cambio> findAll() ;
+
+    @GetMapping(value = "/cambio-crud/time")
+    List<Cambio> findAllTimeProcessed() ;
 
     @PostMapping("/cambio-crud")
-    public ResponseEntity<Cambio> create(@Valid @RequestBody Cambio obj) ;
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<CambioDTO> update(@Valid @PathVariable Long id, @RequestBody CambioDTO objDto);
+    Cambio create(@Valid @RequestBody Cambio obj) ;
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id);
+    @PutMapping(value = "/cambio-crud/{id}")
+    Cambio update(@Valid @PathVariable Long id, @RequestBody Cambio objDto);
+
+    @DeleteMapping(value = "/cambio-crud/{id}")
+    Void delete(@PathVariable Long id);
+
+    @GetMapping(value = "/cambio-crud/delete-mocks")
+    ResponseEntity<Void>  deletemocks();
+
+    @GetMapping(value = "/cambio-crud/get-mocks")
+    List<Cambio>  getMocks();
 
 }

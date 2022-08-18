@@ -17,20 +17,26 @@ public interface BookProxy {
 //    public Book getBook(@PathVariable("id") Long id, @PathVariable("currency") String currency);
 
     @GetMapping(value = "/book-crud/{id}")
-    public ResponseEntity<Book> findById(@PathVariable Long id);
+    BookDTO findById(@PathVariable Long id);
 
     @GetMapping(value = "/book-crud")
-    public ResponseEntity<List<BookDTO>> findAll();
+    List<BookDTO> findAll();
 
     @PostMapping(value = "/book-crud")
-    public ResponseEntity<BookDTO> create(@Valid @RequestBody Book book);
+    BookDTO create(@Valid @RequestBody Book book);
 
     @PutMapping(value = "/book-crud/{id}")
-    public ResponseEntity<BookDTO> update(@Valid @PathVariable Long id, @RequestBody Book book);
+    BookDTO update(@Valid @PathVariable Long id, @RequestBody Book book);
 
     @DeleteMapping(value = "/book-crud/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id);
+    ResponseEntity<Void> delete(@PathVariable Long id);
 
     @GetMapping(value = "/book-crud/time")
-    public ResponseEntity<List<BookDTO>> findAllTimeProcessed();
+    List<BookDTO> findAllTimeProcessed();
+
+    @GetMapping(value = "/book-crud/delete-mocks")
+    ResponseEntity<Void>  deletemocks();
+
+    @GetMapping(value = "/book-crud/get-mocks")
+    List<Book> getMocks();
 }

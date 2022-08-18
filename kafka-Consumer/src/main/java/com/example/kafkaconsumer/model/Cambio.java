@@ -40,6 +40,15 @@ public class Cambio implements Serializable {
 		this.environment = environment;
 	}
 
+	public Cambio(String from, String to, BigDecimal conversionFactor) {
+		super();
+		this.from = from;
+		this.to = to;
+		this.conversionFactor = conversionFactor;
+		this.convertedValue = convertedValue;
+		this.environment = environment;
+	}
+
 	public Long getId() {
 		return id;
 	}
