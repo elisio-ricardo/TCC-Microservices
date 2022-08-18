@@ -12,22 +12,28 @@ import java.util.List;
 @FeignClient(url="http://localhost:7080", name="cambio-crud")
 public interface CambioProxy {
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/cambio-crud/{id}")
     Cambio findById(@PathVariable Long id) ;
 
     @GetMapping("/cambio-crud")
     List<Cambio> findAll() ;
 
-    @GetMapping(value = "/time")
+    @GetMapping(value = "/cambio-crud/time")
     List<Cambio> findAllTimeProcessed() ;
 
     @PostMapping("/cambio-crud")
     Cambio create(@Valid @RequestBody Cambio obj) ;
 
-    @PutMapping(value = "/{id}")
-    CambioDTO update(@Valid @PathVariable Long id, @RequestBody CambioDTO objDto);
+    @PutMapping(value = "/cambio-crud/{id}")
+    Cambio update(@Valid @PathVariable Long id, @RequestBody Cambio objDto);
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/cambio-crud/{id}")
     Void delete(@PathVariable Long id);
+
+    @GetMapping(value = "/cambio-crud/delete-mocks")
+    ResponseEntity<Void>  deletemocks();
+
+    @GetMapping(value = "/cambio-crud/get-mocks")
+    List<Cambio>  getMocks();
 
 }

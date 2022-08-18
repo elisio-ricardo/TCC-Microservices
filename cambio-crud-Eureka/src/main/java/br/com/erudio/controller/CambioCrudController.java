@@ -64,12 +64,12 @@ public class CambioCrudController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CambioDTO> update(@Valid @PathVariable Long id, @RequestBody CambioDTO objDto) {
+	public ResponseEntity<Cambio> update(@Valid @PathVariable Long id, @RequestBody Cambio objDto) {
 		
 
 		Cambio newObj = crudService.update(id, objDto);
 
-		return ResponseEntity.ok().body(new CambioDTO(newObj));
+		return ResponseEntity.ok().body(newObj);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -77,6 +77,17 @@ public class CambioCrudController {
 		crudService.delete(id);
 
 		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping(value = "/delete-mocks")
+	ResponseEntity<Void>  deletemocks(){
+		crudService.deleteMocks();
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping(value = "/get-mocks")
+	public ResponseEntity<List<Cambio>>  getMocks(){
+		return ResponseEntity.ok().body(crudService.getCambiosMock());
 	}
 
 }

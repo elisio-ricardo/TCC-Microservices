@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -63,9 +64,12 @@ public class KafkaMessageConsumer {
     private void processBookRequest(MessageConsumerDTO message){
         switch (message.getMethod()) {
 
+            case GET_BOOK:
+                //TODO
+                break;
+
             //Book CRUD
             case FIND_BOOK_BY_ID:{
-                //todo something
                 String initialTime = LocalDateTime.now().toString();
                 Long start = System.currentTimeMillis();
                 for (int i = 0; i < message.getRepetitions(); i++) {
@@ -179,8 +183,24 @@ public class KafkaMessageConsumer {
     private void processCambioRequest(MessageConsumerDTO message){
         switch (message.getMethod()){
             case GET_CAMBIO:
+                //TODO
                 break;
             case FIND_CAMBIO_BY_ID:
+            {
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    Cambio byId = cambioProxy.findById(1l);
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end - start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(), message.getMethod().toString());
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end - start));
+            }
                 break;
             case FIND_ALL_CAMBIO: {
                 String initialTime = LocalDateTime.now().toString();
@@ -194,21 +214,98 @@ public class KafkaMessageConsumer {
 
                 registerTransaction(initialTime,
                         endTime, timeLapsed.toString(), 0,
-                        message.getRepetitions(), MethodRequested.FIND_ALL_CAMBIO.toString());
+                        message.getRepetitions(), message.getMethod().toString());
 
-                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} nanossegundos", message, (end - start));
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISEGUNDOS", message, (end - start));
             }
                 break;
             case CREATE_CAMBIO:
+            {
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    Cambio cambio = cambioProxy.create(getMoockCambio());
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end-start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(),message.getMethod().toString());
+
+                deleteCambioMoocks();
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end-start));
+            }
                 break;
-            case UPDATE_CAMBIO:
+            case UPDATE_CAMBIO: {
+
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    Cambio cambio = cambioProxy.create(getMoockCambio());
+                }
+                List<Cambio> listMock = getListCambioMock();
+
+
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < listMock.size(); i++) {
+                    listMock.get(i).setFrom("BRL");
+                    cambioProxy.update(listMock.get(i).getId(), listMock.get(i));
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end - start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(), message.getMethod().toString());
+
+                deleteCambioMoocks();
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end - start));
+            }
                 break;
             case DELETE_CAMBIO:
+            {
+                for (int i = 0; i < message.getRepetitions(); i++) {
+                    Cambio cambio = cambioProxy.create(getMoockCambio());
+                }
+                List<Cambio> listMock = getListCambioMock();
+                String initialTime = LocalDateTime.now().toString();
+                Long start = System.currentTimeMillis();
+                for (int i = 0; i < listMock.size(); i++) {
+                    cambioProxy.delete(listMock.get(i).getId());
+                }
+                Long end = System.currentTimeMillis();
+                String endTime = LocalDateTime.now().toString();
+                Long timeLapsed = end-start;
+
+                registerTransaction(initialTime,
+                        endTime, timeLapsed.toString(), 0,
+                        message.getRepetitions(),message.getMethod().toString());
+
+                log.info("MICROSSERVICE \t Method requested {} \t Time elapsed {} MILISSEGUNDOS", message.getMethod(), (end-start));
+            }
                 break;
 
             default:
                 System.out.println("Erro nao encontrado");
         }
+    }
+
+    private void deleteCambioMoocks() {
+        try{
+            cambioProxy.deletemocks();
+        }catch (Exception ex){
+            log.info("Error "+ex.getMessage());
+        }
+    }
+
+    private Cambio getMoockCambio() {
+        BigDecimal conversionFactor = new BigDecimal(135.78);
+        Cambio cambio = new Cambio("USD", "MCK", conversionFactor);
+        return cambio;
     }
 
     private Book getMoockBook() {
@@ -232,6 +329,16 @@ public class KafkaMessageConsumer {
     private List<Book> getListMock(){
         try{
             List<Book> mocks = bookProxy.getMocks();
+            return mocks;
+        }catch (Exception ex){
+            log.info("Error "+ex.getMessage());
+        }
+        return null;
+    }
+
+    private List<Cambio> getListCambioMock() {
+        try{
+            List<Cambio> mocks = cambioProxy.getMocks();
             return mocks;
         }catch (Exception ex){
             log.info("Error "+ex.getMessage());

@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import br.com.erudio.dtos.CambioDTO;
-import br.com.erudio.exceptions.repository.CambioCrudRepository;
+import br.com.erudio.repository.CambioCrudRepository;
 
 import br.com.erudio.service.exception.ObjectNotFoundException;
 
@@ -42,13 +41,10 @@ public class CambioCrudService {
 		return cambioCrudRepository.save(obj);
 	}
 
-	public Cambio update(Long id, CambioDTO objDto) {
+	public Cambio update(Long id, Cambio objDto) {
 		Cambio obj = findById(id);
-		obj.setEnvironment(obj.getEnvironment());
-		obj.setFrom(obj.getFrom());
-		obj.setTo(objDto.getTo());
-		obj.setConversionFactor(objDto.getConversionFactor());
-		obj.setConvertedValue(objDto.getConvertedValue());
+		objDto.setId(obj.getId());
+		obj = objDto;
 		return cambioCrudRepository.save(obj);
 	}
 
@@ -64,4 +60,14 @@ public class CambioCrudService {
 		}
 	}
 
+    public void deleteMocks() {
+		List<Cambio> cambios = cambioCrudRepository.getCambioMocks();
+		for (int i = 0; i < cambios.size(); i++) {
+			cambioCrudRepository.deleteById(cambios.get(i).getId());
+		}
+    }
+
+	public List<Cambio> getCambiosMock() {
+		return cambioCrudRepository.getCambioMocks();
+	}
 }
