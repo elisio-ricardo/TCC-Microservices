@@ -43,7 +43,9 @@ Será necessario fazer os devidos ajustes no  yml para ser usado no seu banco de
 		
 	Iniciar microsservice naming-service
 	Iniciar microsservice api-gateway
+	Iniciar microsservice book-service (porta 8100)
 	Iniciar microsservice book-crud (porta 7000)
+	Iniciar microsservice cambio-service (porta 8000)
 	Iniciar microsservice cambio-crud (porta 7080)
 	Iniciar microsservice kafka consumer
 	Iniciar microsservice kafka producer (porta 8087)
