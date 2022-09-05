@@ -42,6 +42,7 @@ Será necessario fazer os devidos ajustes no  yml para ser usado no seu banco de
 		Certifique-se que os containeres estão rodando e então siga  com a execução dos serviços na seguinte ordem : 
 		
 	Iniciar microsservice naming-service
+	Iniciar microsservice api-gateway
 	Iniciar microsservice book-crud (porta 7000)
 	Iniciar microsservice cambio-crud (porta 7080)
 	Iniciar microsservice kafka consumer
