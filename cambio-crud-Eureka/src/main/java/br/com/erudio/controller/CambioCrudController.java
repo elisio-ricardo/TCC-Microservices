@@ -39,6 +39,7 @@ public class CambioCrudController {
 		return ResponseEntity.ok().body(obj);
 	}
 
+
 	@GetMapping
 	public ResponseEntity<List<Cambio>> findAll() {
 		List<Cambio> listDTO = crudService.getListOfCambio();

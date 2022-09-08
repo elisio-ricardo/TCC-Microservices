@@ -50,7 +50,7 @@ public class BookCrudService {
 		try {
 			bookCrudRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) { // esta exceção é do spring
-			throw new br.com.erudio.service.exception.DataIntegrityViolationException(// adicionada esta exceção personalizada
+			throw new RuntimeException(// adicionada esta exceção personalizada
 					"Categoria não pode ser deletado! Possui livros associados");
 		}
 	}
